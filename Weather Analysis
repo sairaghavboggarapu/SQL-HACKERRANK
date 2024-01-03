@@ -1,0 +1,12 @@
+Select A.R,A.D,B.d,c.d from (Select Month(Record_date)as R, Max(data_value) as d from temperature_records
+Where Data_type='Max'
+ Group by Month (Record_date))A
+Inner Join
+(Select Month(Record_date)as R, Min(data_value) as d from 
+temperature_records 
+Where Data_type='Min'
+Group by Month (Record_date)) B on A.r=B.R
+Inner Join
+(Select Month(Record_date)as R, Round (Avg(data_value),0) as d from temperature_records
+Where Data_type='Avg'
+Group by Month (Record_date)) C on A.r=C.R
